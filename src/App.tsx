@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import bgVideo from './imports/ABCAI.mp4';
+import bgVideo from './assets/ABCAI.mp4';
 
 const BotIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="18" height="10" x="3" y="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" x2="8" y1="16" y2="16"/><line x1="16" x2="16" y1="16" y2="16"/></svg>
@@ -97,20 +97,10 @@ export default function App() {
       </header>
 
       {/* Main Layout */}
-      <main className="relative z-10 flex flex-1 flex-col lg:flex-row pt-24 pb-8 px-6 lg:px-8 gap-8 max-w-[1800px] mx-auto w-full">
-        
-        {/* Left Column: Heading */}
-        <div className="flex w-full flex-col pt-10 lg:w-[28%] lg:pt-24 xl:w-[25%] shrink-0">
-          <h1 className="mb-4 text-[3.5rem] leading-[1.1] font-bold tracking-tight text-white lg:text-[4rem] xl:text-[5rem]">
-            AfriBiz<br />Connect
-          </h1>
-          <p className="max-w-xs text-lg text-neutral-400">
-            Building Africa's Next Generation of Digital Businesses.
-          </p>
-        </div>
+      <main className="relative z-10 flex flex-1 flex-col lg:flex-row pt-18 pb-0 px-6 lg:px-0 gap-8 max-w-[1800px] mx-auto w-full">
         
         {/* Right Column: Video & Interface Container */}
-        <div className="relative flex flex-1 w-full min-h-[600px] flex-col items-center justify-end overflow-hidden rounded-[2rem] border border-white/10 bg-black/40 shadow-2xl lg:min-h-0 lg:h-[85vh]">
+        <div className="relative flex flex-1 w-full min-h-[600px] flex-col items-center justify-end overflow-hidden bg-black/40 shadow-2xl lg:min-h-0 lg:h-[110vh]">
           
           <video
             ref={videoRef}
@@ -128,6 +118,14 @@ export default function App() {
 
           {/* Overlay Content (AI Chat + Action Grid) */}
           <div className="relative z-10 mb-10 flex w-full max-w-4xl flex-col items-center px-4">
+
+            {/* Glassmorphic AI Chat Bubble */}
+            <div className="mb-8 max-w-[440px] rounded-[1.5rem] border border-white/10 bg-white/5 px-4 py-2 text-center shadow-2xl backdrop-blur-xl">
+              <p className="text-[15px] font-medium text-white">
+                International Multi-Award Winning Company.
+              </p>
+            </div>
+
             {/* Actions Grid */}
             <div className="grid w-full grid-cols-2 gap-3 md:grid-cols-4 lg:gap-4">
               {actions.map((action, idx) => (
