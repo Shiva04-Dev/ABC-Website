@@ -158,7 +158,7 @@ function Hero() {
               video.style.display = "none"
             }}
           >
-            <source src={HERO_VIDEO_SRC} type="video/mp4" />
+            <source src= "https://t6ixym4mwqh4xt7d.private.blob.vercel-storage.com/ABCAI.mp4?vercel-blob-valid-until=1786038593655&vercel-blob-delegation=eyJzdG9yZUlkIjoic3RvcmVfVDZpWHlNNG13cUg0eFQ3RCIsIm93bmVySWQiOiJ0ZWFtXzNWQnpNRjhyMkR3ajQ2NW5lNmg3QmhwbyIsInBhdGhuYW1lIjoiKiIsIm9wZXJhdGlvbnMiOlsiZ2V0IiwiaGVhZCJdLCJ2YWxpZFVudGlsIjoxNzg2MDgxNzI2MzcwLCJpYXQiOjE3ODYwMzg1MjY4MDl9.gzvJ4Ai2AJB8a4HZ6CC8kzpBROu3lt8Oju_lUcVie60&vercel-blob-signature=7i8vwF3IRrVT8LVh-XtT-BjEhZ-fIAzDY1W7jXKf74M" type="video/mp4" />
           </video>
         ) : (
           <img
