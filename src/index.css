@@ -1,17 +1,127 @@
 @import 'tailwindcss';
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import '@fontsource/geist-sans/latin-400.css';
+@import '@fontsource/geist-sans/latin-500.css';
+@import '@fontsource/geist-sans/latin-600.css';
+@import '@fontsource/geist-mono/latin-400.css';
 
 @theme {
-  --font-sans: 'Inter', sans-serif;
-  --color-brand-cyan: #5eead4;
-  --color-brand-emerald: #34d399;
+  --font-sans: 'Geist Sans', sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+
+  --color-canvas: #050505;
+  --color-surface: #15171a;
+  --color-ink: #ffffff;
+  --color-ink-dim: #9ba1a6;
+  --color-accent: #34d399;
+  --color-accent-dim: #1b5c48;
+  --color-signature: #5eead4;
+
+  --ease-out-strong: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --container-page: 90rem;
 }
 
 @layer base {
   body {
-    background-color: #050505;
-    color: #ffffff;
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
     font-family: var(--font-sans);
+  }
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-accent);
+  color: var(--color-canvas);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: top 200ms var(--ease-out-strong);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+@layer utilities {
+  /* Reveal-on-scroll: only active once JS has attached (see main.tsx),
+     so content stays fully visible if JS fails to load. */
+  html.js .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 600ms var(--ease-out-strong),
+      transform 600ms var(--ease-out-strong);
+  }
+
+  html.js .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Panel wipe: each item stays fully in place and visible. An opaque cover
+     panel sits over it and slides away (transform only — no clip-path, no
+     paint cost) like a shutter opening, instead of the content itself
+     fading in. */
+  html.js .reveal-stagger > * {
+    position: relative;
+    overflow: hidden;
+  }
+
+  html.js .reveal-stagger > * > .wipe-cover {
+    position: absolute;
+    inset: 0;
+    background: var(--color-surface);
+    transform-origin: left center;
+    transform: scaleX(1);
+    transition: transform 550ms var(--ease-out-strong);
+    pointer-events: none;
+  }
+
+  html.js .reveal-stagger.is-visible > * > .wipe-cover {
+    transform: scaleX(0);
+  }
+
+  /* Real stagger: each child's panel opens 80ms after the previous, capped
+     at 12 items so a large grid doesn't take multiple seconds to finish. */
+  html.js .reveal-stagger > *:nth-child(1) > .wipe-cover {
+    transition-delay: 0ms;
+  }
+  html.js .reveal-stagger > *:nth-child(2) > .wipe-cover {
+    transition-delay: 80ms;
+  }
+  html.js .reveal-stagger > *:nth-child(3) > .wipe-cover {
+    transition-delay: 160ms;
+  }
+  html.js .reveal-stagger > *:nth-child(4) > .wipe-cover {
+    transition-delay: 240ms;
+  }
+  html.js .reveal-stagger > *:nth-child(5) > .wipe-cover {
+    transition-delay: 320ms;
+  }
+  html.js .reveal-stagger > *:nth-child(6) > .wipe-cover {
+    transition-delay: 400ms;
+  }
+  html.js .reveal-stagger > *:nth-child(7) > .wipe-cover {
+    transition-delay: 480ms;
+  }
+  html.js .reveal-stagger > *:nth-child(8) > .wipe-cover {
+    transition-delay: 560ms;
+  }
+  html.js .reveal-stagger > *:nth-child(9) > .wipe-cover {
+    transition-delay: 640ms;
+  }
+  html.js .reveal-stagger > *:nth-child(10) > .wipe-cover {
+    transition-delay: 720ms;
+  }
+  html.js .reveal-stagger > *:nth-child(11) > .wipe-cover {
+    transition-delay: 800ms;
+  }
+  html.js .reveal-stagger > *:nth-child(n + 12) > .wipe-cover {
+    transition-delay: 880ms;
   }
 }
 
@@ -21,13 +131,15 @@
 }
 
 .glow-btn::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: -1px;
   border-radius: 12px;
   padding: 1px;
   background: linear-gradient(135deg, rgba(94, 234, 212, 0.4), rgba(52, 211, 153, 0.1));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
@@ -36,9 +148,50 @@
 
 .glow-btn:hover {
   background: rgba(94, 234, 212, 0.05);
-  box-shadow: 0 0 20px rgba(94, 234, 212, 0.15), inset 0 0 10px rgba(94, 234, 212, 0.05);
+  box-shadow:
+    0 0 20px rgba(94, 234, 212, 0.15),
+    inset 0 0 10px rgba(94, 234, 212, 0.05);
 }
 
 .glow-btn:hover::before {
   background: linear-gradient(135deg, rgba(94, 234, 212, 0.8), rgba(52, 211, 153, 0.4));
+}
+
+@keyframes scan-sweep {
+  0% {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+}
+
+html.js .scan-line {
+  animation: scan-sweep 1600ms var(--ease-out-strong) 400ms 1 both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  html.js .reveal-stagger > * > .wipe-cover {
+    transform: scaleX(0) !important;
+    transition: none !important;
+  }
+
+  html.js .scan-line {
+    animation: none !important;
+    display: none;
+  }
 }
