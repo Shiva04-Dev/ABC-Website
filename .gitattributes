@@ -144,3 +144,10 @@
 *.stl                filter=lfs diff=lfs merge=lfs -text
 *.nc                 filter=lfs diff=lfs merge=lfs -text
 *.mat                filter=lfs diff=lfs merge=lfs -text
+
+# ---------------------------------------------------------------------------
+# Public static assets (Vercel deploys the raw git blob, it does not run
+# `git lfs pull` — anything under public/ must be stored as real bytes, not
+# an LFS pointer, or it 404s/fails to decode in production)
+# ---------------------------------------------------------------------------
+/public/** filter= diff= merge= text=auto
