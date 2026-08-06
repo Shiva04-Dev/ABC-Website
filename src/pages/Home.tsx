@@ -18,7 +18,7 @@ import {
   VolumeXIcon,
 } from "../components/icons"
 
-const HERO_VIDEO_SRC = "/ABCAI.mp4"
+const HERO_VIDEO_SRC = "/website-bg.mp4"
 const HERO_POSTER_SRC = "/poster.jpg"
 
 const SERVICES = [
