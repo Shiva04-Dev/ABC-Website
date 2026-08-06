@@ -147,15 +147,19 @@ function Hero() {
           <video
             ref={videoRef}
             autoPlay
+            muted         // MUST HAVE THIS for autoPlay to work
+            loop          // Usually wanted for backgrounds
             playsInline
             preload="metadata"
+            crossOrigin="anonymous" // MUST HAVE THIS for external URLs
             poster={HERO_POSTER_SRC}
             aria-hidden="true"
             className="h-full w-full object-cover opacity-70"
             onEnded={handleEnded}
             onError={(event) => {
-              const video = event.currentTarget
-              video.style.display = "none"
+              console.error("Video Error:", event); // Add this to see the actual error in console
+              const video = event.currentTarget;
+              video.style.display = "none";
             }}
           >
             <source src= "https://t6ixym4mwqh4xt7d.private.blob.vercel-storage.com/ABCAI.mp4?vercel-blob-valid-until=1786038593655&vercel-blob-delegation=eyJzdG9yZUlkIjoic3RvcmVfVDZpWHlNNG13cUg0eFQ3RCIsIm93bmVySWQiOiJ0ZWFtXzNWQnpNRjhyMkR3ajQ2NW5lNmg3QmhwbyIsInBhdGhuYW1lIjoiKiIsIm9wZXJhdGlvbnMiOlsiZ2V0IiwiaGVhZCJdLCJ2YWxpZFVudGlsIjoxNzg2MDgxNzI2MzcwLCJpYXQiOjE3ODYwMzg1MjY4MDl9.gzvJ4Ai2AJB8a4HZ6CC8kzpBROu3lt8Oju_lUcVie60&vercel-blob-signature=7i8vwF3IRrVT8LVh-XtT-BjEhZ-fIAzDY1W7jXKf74M" type="video/mp4" />
