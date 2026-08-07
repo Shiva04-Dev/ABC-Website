@@ -1,10 +1,16 @@
 import { lazy, Suspense } from "react"
+
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+
 import Nav from "./components/Nav"
+
 import Footer from "./components/Footer"
+
 import RouteEffects from "./components/RouteEffects"
 
 const Home = lazy(() => import("./pages/Home"))
+
+const About = lazy(() => import("./pages/About"))
 
 export default function App() {
   return (
@@ -16,6 +22,7 @@ export default function App() {
           <Suspense fallback={null}>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
             </Routes>
           </Suspense>
         </main>

@@ -1,12 +1,18 @@
 import { useEffect, useRef, useState } from "react"
+
 import { NavLink } from "react-router-dom"
+
 import { ArrowRightIcon, MenuIcon, XIcon } from "./icons"
 
 const NAV_ITEMS = [
   { label: "Home", to: "/", built: true },
-  { label: "About", to: "#", built: false },
+
+  { label: "About", to: "/about", built: true },
+
   { label: "Services", to: "#", built: false },
+
   { label: "Team", to: "#", built: false },
+
   { label: "Projects", to: "#", built: false },
 ]
 
@@ -15,40 +21,52 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
+
   const menuRef = useRef<HTMLDivElement>(null)
+
   const toggleRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     if (!menuOpen) return
 
     const menuNode = menuRef.current
+
     if (!menuNode) return
 
     const focusable = menuNode.querySelectorAll<HTMLElement>(
       "a[href], button:not([disabled])",
     )
+
     const first = focusable[0]
+
     const last = focusable[focusable.length - 1]
+
     first?.focus()
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setMenuOpen(false)
+
         toggleRef.current?.focus()
+
         return
       }
+
       if (event.key !== "Tab") return
 
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault()
+
         last?.focus()
       } else if (!event.shiftKey && document.activeElement === last) {
         event.preventDefault()
+
         first?.focus()
       }
     }
 
     document.addEventListener("keydown", handleKeyDown)
+
     return () => document.removeEventListener("keydown", handleKeyDown)
   }, [menuOpen])
 
