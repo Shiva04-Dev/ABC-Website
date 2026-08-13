@@ -11,7 +11,7 @@ const NAV_ITEMS = [
 
   { label: "Services", to: "#", built: false },
 
-  { label: "Team", to: "#", built: false },
+  { label: "Team", to: "/team", built: true },
 
   { label: "Projects", to: "#", built: false },
 ]

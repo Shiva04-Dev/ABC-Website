@@ -18,7 +18,15 @@ export default function Footer() {
           {FOOTER_NAV.map((label) => (
             <a
               key={label}
-              href={label === "Home" ? "/" : label === "About" ? "/about" : "#"}
+              href={
+                label === "Home"
+                  ? "/"
+                  : label === "About"
+                    ? "/about"
+                    : label === "Team"
+                      ? "/team"
+                      : "#"
+              }
               className="transition-colors hover:text-ink"
             >
               {label}
