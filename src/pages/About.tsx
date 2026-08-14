@@ -1,60 +1,91 @@
 import { lazy, Suspense } from "react"
+
 import { useMediaQuery } from "../hooks/useMediaQuery"
+
 import type { Accolade } from "../components/AccoladesStack"
 
 const RecognitionMap = lazy(() => import("../components/RecognitionMap"))
+
 const AccoladesStack = lazy(() => import("../components/AccoladesStack"))
 
 const CONNECTED_COUNTRIES = [
   "South Africa",
+
   "Nigeria",
+
   "United Kingdom",
+
   "Singapore",
+
   "Ghana",
 ]
 
 const ACCOLADES: Accolade[] = [
   {
     award: "Hands Up For Small Business Owner — Winner",
+
     issuer: "Nedbank",
+
     location: "South Africa",
   },
+
   {
     award: "Most Empowering Software & Marketing Agency, 2025",
+
     location: "International",
   },
+
   {
     award: "Techpreneur of the Year, 2025",
+
     location: "Africa",
   },
+
   {
     award: "Forty Under 40 — 1st Runner Up",
+
     location: "South Africa",
+
     note: "Telecom, Mobile & Software Development",
   },
+
   {
     award: "Best Software & Marketing Agency in Africa, 2025 — Winner",
+
     issuer: "World Business Outlook",
+
     location: "Singapore",
   },
+
   {
     award: "Ministry of Foreign Affairs Recognition",
+
     issuer: "Africa Intercontinental Network",
+
     location: "Abuja, Nigeria",
   },
+
   {
     award: "KZN Youth Business Awards — Technology",
+
     issuer: "Hollywood Bets Foundation",
+
     location: "KwaZulu-Natal, South Africa",
   },
+
   {
     award: "Digital Solutions of the Year",
+
     issuer: "Corporate Livewire",
+
     location: "United Kingdom",
   },
+
   {
     award: "Nexus 100: Africa's Most Influential Tech Minds",
+
     issuer: "Empire Magazine Africa",
+
     location: "Ghana",
   },
 ]

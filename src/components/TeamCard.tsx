@@ -1,14 +1,22 @@
 import { useRef } from "react"
+
 import Tilt from "react-parallax-tilt"
+
 import { useMediaQuery } from "../hooks/useMediaQuery"
 
 export interface TeamMember {
   name: string
+
   city: string
+
   role: string
+
   phone?: string
+
   quip: string
+
   division: "technical" | "non-technical"
+
   photo: string
 }
 
@@ -17,25 +25,36 @@ interface TeamCardProps {
 }
 
 // A soft arc of light that chases the cursor around the photo's ring,
+
 // instead of spinning on its own — the same cursor input that drives the
+
 // tilt also drives this, so it's one combined cursor-motion animation.
+
 const GLOW_GRADIENT =
   "conic-gradient(from var(--glow-angle, 0deg), var(--color-signature) 0deg, var(--color-accent) 20deg, transparent 60deg, transparent 300deg, var(--color-accent) 340deg, var(--color-signature) 360deg)"
 
 export default function TeamCard({ member }: TeamCardProps) {
   const canHover = useMediaQuery("(hover: hover) and (pointer: fine)")
+
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
+
   const interactionEnabled = canHover && !prefersReducedMotion
+
   const glowRef = useRef<HTMLDivElement>(null)
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     if (!interactionEnabled || !glowRef.current) return
+
     const rect = event.currentTarget.getBoundingClientRect()
+
     const centerX = rect.left + rect.width / 2
+
     const centerY = rect.top + rect.height / 2
+
     const angle =
       Math.atan2(event.clientY - centerY, event.clientX - centerX) *
       (180 / Math.PI)
+
     glowRef.current.style.setProperty("--glow-angle", `${angle + 90}deg`)
   }
 

@@ -25,7 +25,9 @@ export default function Footer() {
                     ? "/about"
                     : label === "Team"
                       ? "/team"
-                      : "#"
+                      : label === "Services"
+                        ? "/services"
+                        : "#"
               }
               className="transition-colors hover:text-ink"
             >

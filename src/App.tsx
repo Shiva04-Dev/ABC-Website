@@ -14,6 +14,8 @@ const About = lazy(() => import("./pages/About"))
 
 const Team = lazy(() => import("./pages/Team"))
 
+const Services = lazy(() => import("./pages/Services"))
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -26,6 +28,7 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/team" element={<Team />} />
+              <Route path="/services" element={<Services />} />
             </Routes>
           </Suspense>
         </main>
