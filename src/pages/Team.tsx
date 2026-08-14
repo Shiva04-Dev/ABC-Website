@@ -1,5 +1,7 @@
 import { lazy, Suspense } from "react"
+
 import TeamCard from "../components/TeamCard"
+
 import type { TeamMember } from "../components/TeamCard"
 
 const LogoMarquee = lazy(() => import("../components/LogoMarquee"))
@@ -7,38 +9,60 @@ const LogoMarquee = lazy(() => import("../components/LogoMarquee"))
 const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "SHIVA",
+
     city: "JOHANNESBURG",
+
     phone: "(+27)12 345 6789",
+
     role: "AI Engineer & Systems Developer Intern",
+
     quip: "Our Systems Sorcerer! He builds AI so sharp, you'd swear it reads your mind before you've finished the sentence. When it comes to engineering, he's the one that turns 'server down' into 'systems go'!",
+
     division: "technical",
+
     photo: "/shiva.jpg",
   },
+
   {
     name: "THATO",
+
     city: "JOHANNESBURG",
+
     phone: "(+27)12 345 6789",
+
     role: "Data Engineer",
+
     quip: "Builds scalable data infrastructure using platforms like AWS & Apache Spark. She engineers the super-highways data travels on.",
+
     division: "technical",
+
     photo: "/thato.jpg",
   },
+
   {
     name: "TRISTAN",
+
     city: "JOHANNESBURG",
+
     phone: "(+27)12 345 6789",
+
     role: "Project Management Intern",
+
     quip: "Our Deadline Whisperer! He plans projects so tight, you'd think he has a crystal ball for delivery dates. When it comes to project management, he's the one that turns 'scope creep' into 'scope complete'!",
+
     division: "non-technical",
+
     photo: "/tristan.jpg",
   },
 ]
 
 function Division({
   title,
+
   members,
 }: {
   title: string
+
   members: TeamMember[]
 }) {
   return (
@@ -76,6 +100,7 @@ export default function Team() {
   const technical = TEAM_MEMBERS.filter(
     (member) => member.division === "technical",
   )
+
   const nonTechnical = TEAM_MEMBERS.filter(
     (member) => member.division === "non-technical",
   )

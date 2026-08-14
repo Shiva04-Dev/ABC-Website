@@ -1,13 +1,18 @@
 import { useEffect, useRef } from "react"
+
 import gsap from "gsap"
+
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 gsap.registerPlugin(ScrollTrigger)
 
 export interface Accolade {
   award: string
+
   issuer?: string
+
   location: string
+
   note?: string
 }
 
@@ -20,6 +25,7 @@ export default function AccoladesStack({ accolades }: AccoladesStackProps) {
 
   useEffect(() => {
     const wrap = wrapRef.current
+
     if (!wrap) return
 
     const ctx = gsap.context(
@@ -30,34 +36,53 @@ export default function AccoladesStack({ accolades }: AccoladesStackProps) {
           if (index === cards.length - 1) return
 
           // Pin this card at the top of the viewport from the moment it
+
           // arrives until the very last card arrives — every earlier card
+
           // stays pinned in the same spot for the rest of the scroll, which
+
           // is what lets them stack rather than just scroll past.
+
           ScrollTrigger.create({
             trigger: card,
+
             start: "top top",
+
             endTrigger: cards[cards.length - 1],
+
             end: "top top",
+
             pin: true,
+
             pinSpacing: false,
           })
 
           // As the next card arrives, this one recedes: shrinks and dims,
+
           // scrubbed to the next card's own entry so it tracks the scroll
+
           // continuously instead of jumping.
+
           gsap.to(card, {
             scale: 0.92,
+
             opacity: 0.35,
+
             ease: "none",
+
             scrollTrigger: {
               trigger: cards[index + 1],
+
               start: "top bottom",
+
               end: "top top",
+
               scrub: true,
             },
           })
         })
       },
+
       wrap,
     )
 

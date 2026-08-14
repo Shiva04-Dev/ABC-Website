@@ -1,11 +1,17 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react"
+
 import { useMagneticHover } from "../hooks/useMagneticHover"
+
 import { useMediaQuery } from "../hooks/useMediaQuery"
+
 import { useReveal } from "../hooks/useReveal"
 
 // Lazy: pulls in the WebGL globe renderer, and this section is below the
+
 // fold, so it shouldn't weigh down Home's initial load.
+
 const Globe = lazy(() => import("../components/Globe"))
+
 import {
   BotIcon,
   CloudUploadIcon,
@@ -23,36 +29,53 @@ const HERO_POSTER_SRC = "/poster.jpg"
 
 const SERVICES = [
   { icon: BotIcon, label: "Implement AI\nSolutions" },
+
   { icon: SettingsIcon, label: "Automate\nMy Business" },
+
   { icon: LaptopIcon, label: "Build Custom\nSoftware" },
+
   { icon: SmartphoneIcon, label: "Create a\nMobile App" },
+
   { icon: CloudUploadIcon, label: "Alquiheri\nMobile Analytics" },
+
   { icon: GlobeIcon, label: "Transform My\nDigital Presence" },
+
   { icon: TrendingUpIcon, label: "Grow My\nBusiness" },
 ]
 
 const PROCESS_STEPS = [
   {
     step: "01",
+
     title: "Discover",
+
     description:
       "We start by understanding the actual problem, not just the request as written.",
   },
+
   {
     step: "02",
+
     title: "Design",
+
     description:
       "Solutions are scoped around your existing systems, not a rebuild from scratch.",
   },
+
   {
     step: "03",
+
     title: "Build",
+
     description:
       "Implementation happens in the open, with regular check-ins along the way.",
   },
+
   {
     step: "04",
+
     title: "Support",
+
     description:
       "We stay on after launch — software that ships is software that gets maintained.",
   },
@@ -61,15 +84,20 @@ const PROCESS_STEPS = [
 const APPROACH_POINTS = [
   {
     title: "We ship implementations.",
+
     description: "Not decks, not audits — working software your team can use.",
   },
+
   {
     title: "One team, start to finish.",
+
     description:
       "The people who scope the work are the same people who build it.",
   },
+
   {
     title: "Built for how you operate.",
+
     description:
       "Solutions designed around your existing systems, not a rebuild from scratch.",
   },
@@ -102,41 +130,62 @@ function ServiceButton({ service }: { service: typeof SERVICES[number] }) {
 
 function Hero() {
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
+
   const isNarrowViewport = useMediaQuery("(max-width: 767px)")
+
   const showVideo = !prefersReducedMotion && !isNarrowViewport
+
   const videoRef = useRef<HTMLVideoElement>(null)
+
   const [isMuted, setIsMuted] = useState(false)
 
   useEffect(() => {
     const video = videoRef.current
+
     if (!video || !showVideo) return
 
     // Try playing with sound on the first playthrough. Browsers commonly
+
     // block unmuted autoplay for first-time visitors — if that happens,
+
     // fall back to a muted play so the video still runs instead of
+
     // sitting frozen on the poster.
+
     video.muted = false
+
     setIsMuted(false)
+
     video.play().catch(() => {
       video.muted = true
+
       setIsMuted(true)
+
       video.play().catch(() => {})
     })
   }, [showVideo])
 
   const handleEnded = () => {
     const video = videoRef.current
+
     if (!video) return
+
     // After the first full playthrough, mute and keep looping silently.
+
     video.muted = true
+
     setIsMuted(true)
+
     video.play().catch(() => {})
   }
 
   const toggleMuted = () => {
     const video = videoRef.current
+
     if (!video) return
+
     video.muted = !video.muted
+
     setIsMuted(video.muted)
   }
 
@@ -156,9 +205,9 @@ function Hero() {
             className="h-full w-full object-cover opacity-70"
             onEnded={handleEnded}
             onError={(event) => {
-              console.error("Video Error:", event); // Add this to see the actual error in console
-              const video = event.currentTarget;
-              video.style.display = "none";
+              const video = event.currentTarget
+
+              video.style.display = "none"
             }}
           >
             <source src={HERO_VIDEO_SRC} type="video/mp4" />

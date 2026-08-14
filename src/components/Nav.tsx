@@ -9,7 +9,7 @@ const NAV_ITEMS = [
 
   { label: "About", to: "/about", built: true },
 
-  { label: "Services", to: "#", built: false },
+  { label: "Services", to: "/services", built: true },
 
   { label: "Team", to: "/team", built: true },
 

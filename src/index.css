@@ -17,6 +17,7 @@
   --color-signature: #5eead4;
 
   --ease-out-strong: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-flip: cubic-bezier(0.3, 0, 0.2, 1);
 
   --container-page: 90rem;
 }
@@ -176,6 +177,39 @@
 
 html.js .scan-line {
   animation: scan-sweep 1600ms var(--ease-out-strong) 400ms 1 both;
+}
+
+/* Split-flap counter: the outgoing character sits on top of the already-
+   updated value underneath and folds away top-down, like an airport board
+   flap. Only mounted while a flip is in flight (see SplitFlapCounter.tsx) —
+   reduced-motion skips rendering this layer entirely rather than overriding
+   the animation here, since the swap is orchestrated in JS either way. */
+.flap-cell {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.flap-leaving {
+  position: absolute;
+  inset: 0;
+  transform-origin: center top;
+  backface-visibility: hidden;
+  animation: flap-fold 320ms var(--ease-flip) forwards;
+}
+
+@keyframes flap-fold {
+  0% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotateX(-100deg);
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
