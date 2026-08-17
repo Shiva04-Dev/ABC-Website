@@ -40,6 +40,22 @@ const TEAM_MEMBERS: TeamMember[] = [
   },
 
   {
+    name: "REBOTILWE",
+
+    city: "JOHANNESBURG",
+
+    phone: "(+27)13 345 6789",
+
+    role: "Full Stack Developer",
+
+    quip: "Our Bridge Builder! He moves from pixels to databases so smoothly, you'd think 'front-end' and 'back-end' were never separate to begin with. When it comes to development, he's the one that turns 'it works on my machine' into 'it works, period'!",
+
+    division: "technical",
+
+    photo: "/Rebotilwe.jpg",
+  },
+
+  {
     name: "TRISTAN",
 
     city: "JOHANNESBURG",
@@ -53,6 +69,22 @@ const TEAM_MEMBERS: TeamMember[] = [
     division: "non-technical",
 
     photo: "/tristan.jpg",
+  },
+
+  {
+    name: "LIA",
+
+    city: "JOHANNESBURG",
+
+    phone: "(+27)13 345 6789",
+
+    role: "Business Developer Intern",
+
+    quip: "Creating engaging captions, ads, and social media content that helps brands grow and connect with their audience.",
+
+    division: "non-technical",
+
+    photo: "/Lia.jpg",
   },
 ]
 
