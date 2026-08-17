@@ -63,6 +63,7 @@ export default function TeamCard({ member }: TeamCardProps) {
       src={member.photo}
       alt={member.name}
       className="h-full w-full rounded-full object-cover"
+      style={{ transform: "scale(1) translateX(2%)" }}
     />
   )
 
@@ -86,7 +87,7 @@ export default function TeamCard({ member }: TeamCardProps) {
             />
           </>
         )}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 overflow-hidden rounded-full">
           {interactionEnabled ? (
             <Tilt
               tiltMaxAngleX={12}
