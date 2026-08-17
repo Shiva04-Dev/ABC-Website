@@ -26,6 +26,7 @@ const COMPANIES = [
 
 interface LogoTileProps {
   name: string
+
   logo?: string
 }
 

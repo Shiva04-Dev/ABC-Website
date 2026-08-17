@@ -25,6 +25,7 @@ import {
 } from "../components/icons"
 
 const HERO_VIDEO_SRC = "/website-bg.mp4"
+
 const HERO_POSTER_SRC = "/poster.jpg"
 
 const SERVICES = [
@@ -131,9 +132,7 @@ function ServiceButton({ service }: { service: typeof SERVICES[number] }) {
 function Hero() {
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
 
-  const isNarrowViewport = useMediaQuery("(max-width: 767px)")
-
-  const showVideo = !prefersReducedMotion && !isNarrowViewport
+  const showVideo = !prefersReducedMotion
 
   const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -196,8 +195,8 @@ function Hero() {
           <video
             ref={videoRef}
             autoPlay
-            muted         // MUST HAVE THIS for autoPlay to work
-            loop          // Usually wanted for backgrounds
+            muted // MUST HAVE THIS for autoPlay to work
+            loop // Usually wanted for backgrounds
             playsInline
             preload="metadata"
             poster={HERO_POSTER_SRC}

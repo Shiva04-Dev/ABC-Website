@@ -1,4 +1,14 @@
-const FOOTER_NAV = ["Home", "About", "Services", "Team"]
+import { Link } from "react-router-dom"
+
+const FOOTER_NAV = [
+  { label: "Home", to: "/" },
+
+  { label: "About", to: "/about" },
+
+  { label: "Services", to: "/services" },
+
+  { label: "Team", to: "/team" },
+]
 
 export default function Footer() {
   return (
@@ -15,24 +25,14 @@ export default function Footer() {
           aria-label="Footer"
           className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink-dim"
         >
-          {FOOTER_NAV.map((label) => (
-            <a
-              key={label}
-              href={
-                label === "Home"
-                  ? "/"
-                  : label === "About"
-                    ? "/about"
-                    : label === "Team"
-                      ? "/team"
-                      : label === "Services"
-                        ? "/services"
-                        : "#"
-              }
+          {FOOTER_NAV.map((item) => (
+            <Link
+              key={item.label}
+              to={item.to}
               className="transition-colors hover:text-ink"
             >
-              {label}
-            </a>
+              {item.label}
+            </Link>
           ))}
         </nav>
 
@@ -43,7 +43,6 @@ export default function Footer() {
           >
             CONTACT
           </span>
-          {/* PLACEHOLDER: no real contact details exist yet — replace before launch */}
           <span>info@afribizconnect.co.za</span>
           <span>(+27)65 332 1150</span>
           <span>Cnr Winnie Mandela Drive, Sloane St,</span>
