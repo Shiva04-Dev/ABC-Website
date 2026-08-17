@@ -1,8 +1,13 @@
 import { lazy, Suspense, useState } from "react"
+
 import { useMediaQuery } from "../hooks/useMediaQuery"
+
 import { useReveal } from "../hooks/useReveal"
+
 import TierCardContent from "../components/TierCardContent"
+
 import type { Tier, TierCountMode } from "../components/TierCardContent"
+
 import { ArrowRightIcon } from "../components/icons"
 
 const TierFlythrough = lazy(() => import("../components/TierFlythrough"))
@@ -10,44 +15,64 @@ const TierFlythrough = lazy(() => import("../components/TierFlythrough"))
 const TIERS: Tier[] = [
   {
     name: "Core",
+
     tagline: "Tier 1 - Core Services to Enhance Your Current Model",
+
     addedFeatures: [
       "Grpahic Design & Social Media Management",
+
       "Brand Photography & Videography",
+
       "Google Packages (Google Affiliate)",
-      "Business Registration"
+
+      "Business Registration",
     ],
   },
+
   {
     name: "Growth",
+
     tagline: "Tier 2 - Grow and Redesign Your Business",
+
     addedFeatures: [
       "Website Development",
+
       "Digital Audit & Strategy",
-      "Search Engine Optimization (SEO)"
+
+      "Search Engine Optimization (SEO)",
     ],
   },
+
   {
     name: "Entreprise",
+
     tagline: "Tier 3 - Not just a Business. Become a Brand.",
+
     addedFeatures: [
       "AI Solutions & Cybersecurity",
+
       "App Development & Cloud Engineering",
+
       "Brand Architecture & Style Guide",
+
       "CRM System Implementation",
-      "PR, Events & 3D Mapping"
+
+      "PR, Events & 3D Mapping",
     ],
   },
 ]
 
 function TierListStatic({
   tiers,
+
   mode,
 }: {
   tiers: Tier[]
+
   mode: TierCountMode
 }) {
   const { ref, isVisible } = useReveal<HTMLDivElement>()
+
   let cumulative: string[] = []
 
   return (
@@ -59,7 +84,9 @@ function TierListStatic({
     >
       {tiers.map((tier) => {
         cumulative = [...cumulative, ...tier.addedFeatures]
+
         const cardFeatures = cumulative
+
         return (
           <TierCardContent
             key={tier.name}
@@ -77,9 +104,11 @@ function TierListStatic({
 
 function TierToggle({
   mode,
+
   onChange,
 }: {
   mode: TierCountMode
+
   onChange: (mode: TierCountMode) => void
 }) {
   return (
@@ -109,6 +138,7 @@ function TierToggle({
 
 function TierSection() {
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
+
   const [mode, setMode] = useState<TierCountMode>("added")
 
   return (
@@ -183,9 +213,10 @@ export default function Services() {
             Three tiers, each one building on the last.
           </h1>
           <p className="max-w-2xl text-base leading-relaxed text-ink-dim lg:text-lg">
-            AfriBiz Connect holds deep roots and a proud commitment to supporting SSMEs and Local Businesses, 
-            particularly within South African Townships.
-            We provide full support & practical training to ensure long-term success.
+            AfriBiz Connect holds deep roots and a proud commitment to
+            supporting SSMEs and Local Businesses, particularly within South
+            African Townships. We provide full support & practical training to
+            ensure long-term success.
           </p>
         </div>
       </section>
