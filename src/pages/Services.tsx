@@ -157,7 +157,7 @@ function ContactQuote() {
         </div>
 
         <a
-          href="mailto:hello@example.com"
+          href="mailto:info@afribizconnect.co.za"
           className="flex shrink-0 items-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-medium text-canvas transition-colors hover:bg-signature focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
         >
           Contact us for a quote <ArrowRightIcon aria-hidden="true" />
