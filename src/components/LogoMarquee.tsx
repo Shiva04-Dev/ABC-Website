@@ -9,28 +9,46 @@ import { useMediaQuery } from "../hooks/useMediaQuery"
 gsap.registerPlugin(ScrollTrigger)
 
 const COMPANIES = [
-  "Shell",
+  { name: "Shell", logo: "/SHELL.png" },
 
-  "SPAR",
+  { name: "SPAR", logo: "/SPAR.png" },
 
-  "PostNet",
+  { name: "PostNet", logo: "/PostNet.png" },
 
-  "DMC",
+  { name: "DMC", logo: "/DMC.png" },
 
-  "VISION",
+  { name: "VISION", logo: "/VISION.png" },
 
-  "ENGEN",
+  { name: "ENGEN", logo: "/ENGEN.png" },
 
-  "LOTUS",
+  { name: "LOTUS", logo: "/LOTUS.png" },
 ]
 
-function LogoTile({ name }: { name: string }) {
+interface LogoTileProps {
+  name: string
+  logo?: string
+}
+
+function LogoTile({ name, logo }: LogoTileProps) {
   return (
-    <div className="flex h-20 w-40 shrink-0 flex-col items-center justify-center gap-1 rounded-xl border border-white/10 bg-surface px-4">
-      <span className="text-sm font-medium text-ink">{name}</span>
-      <span className="font-mono text-[10px] tracking-[0.1em] text-ink-dim/70">
-        [LOGO PLACEHOLDER]
-      </span>
+    <div className="flex h-20 w-40 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-ink p-4">
+      {logo ? (
+        <img
+          src={logo}
+          alt={name}
+          loading="lazy"
+          width={160}
+          height={80}
+          className="h-full w-full object-contain"
+        />
+      ) : (
+        <div className="flex flex-col items-center gap-1 text-center">
+          <span className="text-sm font-medium text-canvas">{name}</span>
+          <span className="font-mono text-[10px] tracking-[0.1em] text-canvas/50">
+            [LOGO PLACEHOLDER]
+          </span>
+        </div>
+      )}
     </div>
   )
 }
@@ -119,8 +137,12 @@ export default function LogoMarquee() {
   if (prefersReducedMotion) {
     return (
       <div className="flex flex-wrap justify-center gap-6">
-        {COMPANIES.map((name) => (
-          <LogoTile key={name} name={name} />
+        {COMPANIES.map((company) => (
+          <LogoTile
+            key={company.name}
+            name={company.name}
+            logo={company.logo}
+          />
         ))}
       </div>
     )
@@ -129,8 +151,12 @@ export default function LogoMarquee() {
   return (
     <div ref={sectionRef} className="overflow-hidden">
       <div ref={trackRef} className="flex w-max items-center gap-6">
-        {[...COMPANIES, ...COMPANIES].map((name, index) => (
-          <LogoTile key={`${name}-${index}`} name={name} />
+        {[...COMPANIES, ...COMPANIES].map((company, index) => (
+          <LogoTile
+            key={`${company.name}-${index}`}
+            name={company.name}
+            logo={company.logo}
+          />
         ))}
       </div>
     </div>

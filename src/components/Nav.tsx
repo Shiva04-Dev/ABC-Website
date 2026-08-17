@@ -12,8 +12,6 @@ const NAV_ITEMS = [
   { label: "Services", to: "/services", built: true },
 
   { label: "Team", to: "/team", built: true },
-
-  { label: "Projects", to: "#", built: false },
 ]
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>

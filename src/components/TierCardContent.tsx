@@ -1,9 +1,12 @@
 import { CheckIcon } from "./icons"
+
 import SplitFlapCounter from "./SplitFlapCounter"
 
 export interface Tier {
   name: string
+
   tagline: string
+
   addedFeatures: string[]
 }
 
@@ -11,9 +14,13 @@ export type TierCountMode = "added" | "total"
 
 interface TierCardContentProps {
   tier: Tier
+
   cumulativeFeatures: string[]
+
   addedCount: number
+
   totalCount: number
+
   mode: TierCountMode
 }
 
@@ -23,9 +30,13 @@ function formatCount(mode: TierCountMode, added: number, total: number) {
 
 export default function TierCardContent({
   tier,
+
   cumulativeFeatures,
+
   addedCount,
+
   totalCount,
+
   mode,
 }: TierCardContentProps) {
   const newFeatures = new Set(tier.addedFeatures)
@@ -61,6 +72,7 @@ export default function TierCardContent({
       <ul className="flex flex-col gap-3">
         {cumulativeFeatures.map((feature) => {
           const isNew = newFeatures.has(feature)
+
           return (
             <li
               key={feature}

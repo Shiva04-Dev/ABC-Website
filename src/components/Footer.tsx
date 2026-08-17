@@ -1,4 +1,4 @@
-const FOOTER_NAV = ["Home", "About", "Services", "Team", "Projects"]
+const FOOTER_NAV = ["Home", "About", "Services", "Team"]
 
 export default function Footer() {
   return (
@@ -44,9 +44,10 @@ export default function Footer() {
             CONTACT
           </span>
           {/* PLACEHOLDER: no real contact details exist yet — replace before launch */}
-          <span>hello@example.com [PLACEHOLDER]</span>
-          <span>+000 000 0000 [PLACEHOLDER]</span>
-          <span>Location on request [PLACEHOLDER]</span>
+          <span>info@afribizconnect.co.za</span>
+          <span>(+27)65 332 1150</span>
+          <span>Cnr Winnie Mandela Drive, Sloane St,</span>
+          <span>Bryanston, Sandton, 2191</span>
         </div>
       </div>
     </footer>
