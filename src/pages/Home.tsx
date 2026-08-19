@@ -31,19 +31,19 @@ const HERO_VIDEO_SRC = "/website-bg.mp4"
 const HERO_POSTER_SRC = "/poster.jpg"
 
 const SERVICES = [
-  { icon: BotIcon, label: "Implement AI\nSolutions" },
+  { icon: BotIcon, label: "Implement\nAI Solutions" },
 
-  { icon: SettingsIcon, label: "Automate\nMy Business" },
+  { icon: SettingsIcon, label: "Website\nDevelopment" },
 
-  { icon: LaptopIcon, label: "Build Custom\nSoftware" },
+  { icon: LaptopIcon, label: "Graphic\nDesign" },
 
-  { icon: SmartphoneIcon, label: "Create a\nMobile App" },
+  { icon: SmartphoneIcon, label: "App\nDevelopment" },
 
-  { icon: CloudUploadIcon, label: "Alquiheri\nMobile Analytics" },
+  { icon: CloudUploadIcon, label: "Cybersecurity" },
 
-  { icon: GlobeIcon, label: "Transform My\nDigital Presence" },
+  { icon: GlobeIcon, label: "Social Media\nManagement" },
 
-  { icon: TrendingUpIcon, label: "Grow My\nBusiness" },
+  { icon: TrendingUpIcon, label: "Search Engine\nOptimization" },
 ]
 
 const PROCESS_STEPS = [
