@@ -1,5 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react"
 
+import { Link } from "react-router-dom"
+
 import { useMagneticHover } from "../hooks/useMagneticHover"
 
 import { useMediaQuery } from "../hooks/useMediaQuery"
@@ -105,12 +107,13 @@ const APPROACH_POINTS = [
 ]
 
 function ServiceButton({ service }: { service: typeof SERVICES[number] }) {
-  const magneticRef = useMagneticHover<HTMLButtonElement>()
+  const magneticRef = useMagneticHover<HTMLAnchorElement>()
 
   return (
-    <button
+    <Link
       ref={magneticRef}
-      type="button"
+      to="/services"
+      aria-label={`${service.label.replace(/\n/g, " ")} — view our services`}
       className="glow-btn group flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-left backdrop-blur-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:gap-4 lg:px-5 lg:py-4"
     >
       <div className="flex items-center gap-3 transition-transform duration-150 active:scale-[0.97] lg:gap-4">
@@ -125,7 +128,7 @@ function ServiceButton({ service }: { service: typeof SERVICES[number] }) {
           {service.label}
         </span>
       </div>
-    </button>
+    </Link>
   )
 }
 

@@ -215,10 +215,10 @@ function AccoladesLedger() {
 
 export default function About() {
   return (
-    <>
+    <div className="relative bg-gradient-to-b from-accent/10 via-canvas to-canvas">
       <Statement />
       <RecognitionSection />
       <AccoladesLedger />
-    </>
+    </div>
   )
 }

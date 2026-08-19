@@ -138,7 +138,7 @@ export default function Team() {
   )
 
   return (
-    <>
+    <div className="relative bg-gradient-to-b from-accent/10 via-canvas to-canvas">
       <section className="relative border-t border-white/10 px-6 pt-32 pb-20 lg:px-10 lg:pt-40 lg:pb-28">
         <div className="mx-auto max-w-page">
           <span className="font-mono text-xs tracking-[0.2em] text-ink-dim">
@@ -156,6 +156,6 @@ export default function Team() {
       <Division title="Technical Team" members={technical} />
       <Division title="Non-Technical Team" members={nonTechnical} />
       <TrustSection />
-    </>
+    </div>
   )
 }
