@@ -1,12 +1,10 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react"
 
-import { Link } from "react-router-dom"
-
-import { useMagneticHover } from "../hooks/useMagneticHover"
-
 import { useMediaQuery } from "../hooks/useMediaQuery"
 
 import { useReveal } from "../hooks/useReveal"
+
+import ChatWidget from "../components/ChatWidget"
 
 // Lazy: pulls in the WebGL globe renderer, and this section is below the
 
@@ -14,37 +12,11 @@ import { useReveal } from "../hooks/useReveal"
 
 const Globe = lazy(() => import("../components/Globe"))
 
-import {
-  BotIcon,
-  CloudUploadIcon,
-  GlobeIcon,
-  LaptopIcon,
-  SettingsIcon,
-  SmartphoneIcon,
-  TrendingUpIcon,
-  Volume2Icon,
-  VolumeXIcon,
-} from "../components/icons"
+import { Volume2Icon, VolumeXIcon } from "../components/icons"
 
 const HERO_VIDEO_SRC = "/website-bg.mp4"
 
 const HERO_POSTER_SRC = "/poster.jpg"
-
-const SERVICES = [
-  { icon: BotIcon, label: "Implement\nAI Solutions" },
-
-  { icon: SettingsIcon, label: "Website\nDevelopment" },
-
-  { icon: LaptopIcon, label: "Graphic\nDesign" },
-
-  { icon: SmartphoneIcon, label: "App\nDevelopment" },
-
-  { icon: CloudUploadIcon, label: "Cybersecurity" },
-
-  { icon: GlobeIcon, label: "Social Media\nManagement" },
-
-  { icon: TrendingUpIcon, label: "Search Engine\nOptimization" },
-]
 
 const PROCESS_STEPS = [
   {
@@ -105,32 +77,6 @@ const APPROACH_POINTS = [
       "Solutions designed around your existing systems, not a rebuild from scratch.",
   },
 ]
-
-function ServiceButton({ service }: { service: typeof SERVICES[number] }) {
-  const magneticRef = useMagneticHover<HTMLAnchorElement>()
-
-  return (
-    <Link
-      ref={magneticRef}
-      to="/services"
-      aria-label={`${service.label.replace(/\n/g, " ")} — view our services`}
-      className="glow-btn group flex items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-left backdrop-blur-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:gap-4 lg:px-5 lg:py-4"
-    >
-      <div className="flex items-center gap-3 transition-transform duration-150 active:scale-[0.97] lg:gap-4">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent transition-colors duration-300 group-hover:bg-accent/20">
-          <service.icon
-            className="h-5 w-5"
-            strokeWidth={1.5}
-            aria-hidden="true"
-          />
-        </div>
-        <span className="text-sm leading-tight font-medium tracking-wide whitespace-pre-line text-ink-dim transition-colors group-hover:text-ink">
-          {service.label}
-        </span>
-      </div>
-    </Link>
-  )
-}
 
 function Hero() {
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)")
@@ -249,7 +195,7 @@ function Hero() {
             type="button"
             onClick={toggleMuted}
             aria-label={isMuted ? "Unmute video" : "Mute video"}
-            className="absolute top-1/2 right-6 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-canvas/60 text-ink backdrop-blur-sm transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:right-10"
+            className="absolute top-36 right-6 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-canvas/60 text-ink backdrop-blur-sm transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:top-40 lg:right-10"
           >
             {isMuted ? (
               <VolumeXIcon aria-hidden="true" />
@@ -279,11 +225,7 @@ function Hero() {
           <span className="text-ink">International Award-Winning Company</span>
         </div>
 
-        <div className="grid w-full grid-cols-2 gap-3 md:grid-cols-4 lg:gap-4">
-          {SERVICES.map((service) => (
-            <ServiceButton key={service.label} service={service} />
-          ))}
-        </div>
+        <ChatWidget />
       </div>
     </section>
   )
