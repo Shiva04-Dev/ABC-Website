@@ -7,8 +7,21 @@ import { ArrowRightIcon, BotIcon } from "./icons"
 // on screen past when the backend would have already dropped it.
 const INACTIVITY_LIMIT_MS = 30 * 60 * 1000
 
-const PLACEHOLDER_REPLY =
-  "Thanks for the message — I'm not connected to the live assistant yet. Once integration is complete, I'll be able to answer questions about AfriBiz Connect and our services."
+// The backend caps message length at 2000 chars (422 past that) — mirror
+// the cap client-side so a normal user can't trigger that error.
+const MAX_MESSAGE_LENGTH = 2000
+
+const CHAT_API_URL = import.meta.env.VITE_CHATBOT_API_URL as string | undefined
+
+const CONFIG_ERROR_MESSAGE =
+  "Chat isn't configured yet — VITE_CHATBOT_API_URL is missing."
+const NETWORK_ERROR_MESSAGE =
+  "Couldn't reach the assistant — check that the backend is running and try again."
+const VALIDATION_ERROR_MESSAGE =
+  "That message couldn't be sent — please rephrase and try again."
+const FALLBACK_ERROR_MESSAGE = "Something went wrong. Please try again shortly."
+
+class ConfigError extends Error {}
 
 type ChatRole = "user" | "assistant"
 
@@ -21,9 +34,16 @@ interface ChatMessage {
 export default function ChatWidget() {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [input, setInput] = useState("")
+  const [isSending, setIsSending] = useState(false)
   const inactivityTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const replyTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const listEndRef = useRef<HTMLDivElement>(null)
+
+  // One id per visit, held only in memory — sessions are meant to last a
+  // single visit, so this deliberately isn't persisted to localStorage.
+  const sessionIdRef = useRef<string | null>(null)
+  if (sessionIdRef.current === null) {
+    sessionIdRef.current = crypto.randomUUID()
+  }
 
   const scheduleInactivityClear = () => {
     if (inactivityTimer.current) clearTimeout(inactivityTimer.current)
@@ -36,41 +56,67 @@ export default function ChatWidget() {
   useEffect(() => {
     return () => {
       if (inactivityTimer.current) clearTimeout(inactivityTimer.current)
-      if (replyTimer.current) clearTimeout(replyTimer.current)
     }
   }, [])
 
   useEffect(() => {
     listEndRef.current?.scrollIntoView({ block: "nearest" })
-  }, [messages])
+  }, [messages, isSending])
 
-  const handleSubmit = (event: FormEvent) => {
+  const addAssistantMessage = (text: string) => {
+    setMessages((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), role: "assistant", text },
+    ])
+  }
+
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
 
     const text = input.trim()
-    if (!text) return
+    if (!text || isSending) return
 
-    const userMessage: ChatMessage = {
-      id: crypto.randomUUID(),
-      role: "user",
-      text,
-    }
-
-    setMessages((prev) => [...prev, userMessage])
+    setMessages((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), role: "user", text },
+    ])
     setInput("")
+    setIsSending(true)
     scheduleInactivityClear()
 
-    // Stand-in reply until the assistant is wired up to the live model.
-    replyTimer.current = setTimeout(() => {
-      const reply: ChatMessage = {
-        id: crypto.randomUUID(),
-        role: "assistant",
-        text: PLACEHOLDER_REPLY,
-      }
+    try {
+      if (!CHAT_API_URL) throw new ConfigError()
 
-      setMessages((prev) => [...prev, reply])
+      const response = await fetch(`${CHAT_API_URL}/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          session_id: sessionIdRef.current,
+          message: text,
+        }),
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        addAssistantMessage(data.reply)
+      } else if (response.status === 422) {
+        addAssistantMessage(VALIDATION_ERROR_MESSAGE)
+      } else {
+        const data = await response.json().catch(() => null)
+        addAssistantMessage(
+          typeof data?.detail === "string"
+            ? data.detail
+            : FALLBACK_ERROR_MESSAGE,
+        )
+      }
+    } catch (error) {
+      addAssistantMessage(
+        error instanceof ConfigError ? CONFIG_ERROR_MESSAGE : NETWORK_ERROR_MESSAGE,
+      )
+    } finally {
+      setIsSending(false)
       scheduleInactivityClear()
-    }, 600)
+    }
   }
 
   return (
@@ -84,7 +130,7 @@ export default function ChatWidget() {
             Ask AfriBiz Connect
           </span>
           <span className="text-xs text-ink-dim">
-            Questions about our services — answers coming soon
+            Ask about our services and what we can build for you
           </span>
         </div>
       </div>
@@ -119,6 +165,13 @@ export default function ChatWidget() {
             </div>
           ))
         )}
+        {isSending && (
+          <div className="flex justify-start" aria-hidden="true">
+            <p className="max-w-[80%] rounded-xl border border-white/10 bg-white/5 px-3.5 py-2 text-sm text-ink-dim">
+              …
+            </p>
+          </div>
+        )}
         <div ref={listEndRef} />
       </div>
 
@@ -136,11 +189,13 @@ export default function ChatWidget() {
           onChange={(event) => setInput(event.target.value)}
           placeholder="Type your question…"
           autoComplete="off"
-          className="h-11 flex-1 rounded-lg border border-white/10 bg-canvas/60 px-3.5 text-sm text-ink placeholder:text-ink-dim/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          maxLength={MAX_MESSAGE_LENGTH}
+          disabled={isSending}
+          className="h-11 flex-1 rounded-lg border border-white/10 bg-canvas/60 px-3.5 text-sm text-ink placeholder:text-ink-dim/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:opacity-60"
         />
         <button
           type="submit"
-          disabled={!input.trim()}
+          disabled={!input.trim() || isSending}
           aria-label="Send message"
           className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-accent text-canvas transition-opacity duration-150 hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
