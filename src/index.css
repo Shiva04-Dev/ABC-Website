@@ -48,8 +48,7 @@
 }
 
 @layer utilities {
-  /* Reveal-on-scroll: only active once JS has attached (see main.tsx),
-     so content stays fully visible if JS fails to load. */
+  /* Reveal-on-scroll: active once JS attaches; stays visible if JS fails. */
   html.js .reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -63,10 +62,7 @@
     transform: translateY(0);
   }
 
-  /* Panel wipe: each item stays fully in place and visible. An opaque cover
-     panel sits over it and slides away (transform only — no clip-path, no
-     paint cost) like a shutter opening, instead of the content itself
-     fading in. */
+  /* Panel wipe: an opaque cover slides away (shutter effect) instead of the content fading in. */
   html.js .reveal-stagger > * {
     position: relative;
     overflow: hidden;
@@ -86,8 +82,7 @@
     transform: scaleX(0);
   }
 
-  /* Real stagger: each child's panel opens 80ms after the previous, capped
-     at 12 items so a large grid doesn't take multiple seconds to finish. */
+  /* Each panel opens 80ms after the previous, capped at 12 items. */
   html.js .reveal-stagger > *:nth-child(1) > .wipe-cover {
     transition-delay: 0ms;
   }
@@ -179,11 +174,7 @@ html.js .scan-line {
   animation: scan-sweep 1600ms var(--ease-out-strong) 400ms 1 both;
 }
 
-/* Split-flap counter: the outgoing character sits on top of the already-
-   updated value underneath and folds away top-down, like an airport board
-   flap. Only mounted while a flip is in flight (see SplitFlapCounter.tsx) —
-   reduced-motion skips rendering this layer entirely rather than overriding
-   the animation here, since the swap is orchestrated in JS either way. */
+/* Split-flap counter: outgoing character folds away top-down like an airport board flap. */
 .flap-cell {
   position: relative;
   display: inline-block;

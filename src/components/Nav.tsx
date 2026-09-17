@@ -71,7 +71,7 @@ export default function Nav() {
   return (
     <header className="absolute inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-5 lg:px-10">
       <NavLink to="/" className="text-xl font-semibold tracking-tight text-ink">
-        AfriBiz Connect
+        Shiva's Solutions
       </NavLink>
 
       <nav

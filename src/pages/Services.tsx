@@ -187,7 +187,7 @@ function ContactQuote() {
         </div>
 
         <a
-          href="mailto:info@afribizconnect.co.za"
+          href="mailto:hello@shivasolutions.dev"
           className="flex shrink-0 items-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-medium text-canvas transition-colors hover:bg-signature focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
         >
           Contact us for a quote <ArrowRightIcon aria-hidden="true" />
@@ -213,10 +213,9 @@ export default function Services() {
             Three tiers, each one building on the last.
           </h1>
           <p className="max-w-2xl text-base leading-relaxed text-ink-dim lg:text-lg">
-            AfriBiz Connect holds deep roots and a proud commitment to
-            supporting SSMEs and Local Businesses, particularly within South
-            African Townships. We provide full support & practical training to
-            ensure long-term success.
+            A tiered service structure designed for growing SMEs — each tier
+            builds on the last, so a business can scale up support as it
+            grows rather than starting over.
           </p>
         </div>
       </section>

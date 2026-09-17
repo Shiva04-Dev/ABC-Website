@@ -18,16 +18,20 @@ interface ArcLine {
 
 const HOME: MarkerPoint = { location: [-26.2041, 28.0473], size: 0.12 } // Johannesburg, South Africa
 
-// Countries an accolade in the ledger was awarded from, connected back to home.
+// Illustrative connection points only, not real offices or clients — one per continent.
 
 const DESTINATIONS: MarkerPoint[] = [
-  { location: [9.0765, 7.3986], size: 0.07 }, // Abuja, Nigeria
+  { location: [9.0765, 7.3986], size: 0.07 }, // Abuja, Nigeria (Africa)
 
-  { location: [51.5072, -0.1276], size: 0.07 }, // United Kingdom
+  { location: [51.5072, -0.1276], size: 0.07 }, // London, United Kingdom (Europe)
 
-  { location: [1.3521, 103.8198], size: 0.07 }, // Singapore
+  { location: [1.3521, 103.8198], size: 0.07 }, // Singapore (Asia)
 
-  { location: [5.6037, -0.187], size: 0.07 }, // Ghana
+  { location: [40.7128, -74.006], size: 0.07 }, // New York, USA (North America)
+
+  { location: [-23.5505, -46.6333], size: 0.07 }, // São Paulo, Brazil (South America)
+
+  { location: [-33.8688, 151.2093], size: 0.07 }, // Sydney, Australia (Oceania)
 ]
 
 const ARCS: ArcLine[] = DESTINATIONS.map((point) => ({
@@ -38,7 +42,7 @@ const ARCS: ArcLine[] = DESTINATIONS.map((point) => ({
 
 const ROTATION_SPEED = 0.0035
 
-// Each arc appears this long after the previous one, once the section is in view.
+// Delay between each arc appearing, once the section scrolls into view.
 
 const ARC_STAGGER_MS = 380
 
@@ -128,9 +132,7 @@ export default function RecognitionMap() {
 
     rafId = requestAnimationFrame(frame)
 
-    // Reveal arcs one at a time once the map scrolls into view, rather than
-
-    // all at once — the connections read as being traced, not dumped in.
+    // Reveal arcs one at a time so the connections read as traced, not dumped in.
 
     let staggerTimeouts: ReturnType<typeof setTimeout>[] = []
 

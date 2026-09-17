@@ -24,11 +24,7 @@ interface TeamCardProps {
   member: TeamMember
 }
 
-// A soft arc of light that chases the cursor around the photo's ring,
-
-// instead of spinning on its own — the same cursor input that drives the
-
-// tilt also drives this, so it's one combined cursor-motion animation.
+// A light arc that follows the cursor around the photo ring, driven by the same input as the tilt.
 
 const GLOW_GRADIENT =
   "conic-gradient(from var(--glow-angle, 0deg), var(--color-signature) 0deg, var(--color-accent) 20deg, transparent 60deg, transparent 300deg, var(--color-accent) 340deg, var(--color-signature) 360deg)"

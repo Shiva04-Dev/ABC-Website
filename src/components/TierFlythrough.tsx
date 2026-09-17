@@ -34,11 +34,7 @@ export default function TierFlythrough({ tiers, mode }: TierFlythroughProps) {
 
         if (!stage || !track || slides.length < 2) return
 
-        // Pixel widths, not percentages — a horizontal sweep tied to scrub
-
-        // needs an exact travel distance, and percentage flex-basis inside
-
-        // a track that's also sized by its children is ambiguous.
+        // Pixel widths, not percentages — scrub needs an exact travel distance.
 
         const stageWidth = stage.getBoundingClientRect().width
 
@@ -50,19 +46,8 @@ export default function TierFlythrough({ tiers, mode }: TierFlythroughProps) {
 
         gsap.set(slides.slice(1), { scale: 0.82, opacity: 0.35 })
 
-        // One pin, one timeline. Cards live side by side and the whole
-
-        // strip pans left as you scroll — a horizontal sweep, not a stack.
-
-        // Each slide still gets its own moment of focus (scaling up as it
-
-        // centers, dipping as the strip moves past it) but nothing ever
-
-        // shares screen space with anything else, which also means an
-
-        // invisible neighbor can never sit on top of a card's own button
-
-        // and swallow its click — the bug the previous stacked version had.
+        // One pin, one timeline: cards sit side by side and the strip pans
+        // left on scroll, so no invisible neighbor can overlap a card's button.
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -108,11 +93,7 @@ export default function TierFlythrough({ tiers, mode }: TierFlythroughProps) {
               index - 1,
             )
 
-            // This slide's newly-added features fly up into place as it
-
-            // centers. Inherited features underneath don't move — they
-
-            // were already won by the previous tier.
+            // Only this slide's newly-added features fly in; inherited ones stay put.
 
             const chips =
               slide.querySelectorAll<HTMLElement>("[data-new-feature]")

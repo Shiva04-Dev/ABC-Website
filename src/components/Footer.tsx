@@ -16,7 +16,7 @@ export default function Footer() {
       <div className="mx-auto flex max-w-page flex-col gap-10 md:flex-row md:justify-between">
         <div className="max-w-sm">
           <p className="text-xs text-ink-dim tracking-tight text-ink">
-            &copy; {new Date().getFullYear()} AfriBiz Connect. All rights
+            &copy; {new Date().getFullYear()} Shiva's Solutions. All rights
             reserved.
           </p>
         </div>
@@ -43,10 +43,8 @@ export default function Footer() {
           >
             CONTACT
           </span>
-          <span>info@afribizconnect.co.za</span>
-          <span>(+27)65 332 1150</span>
-          <span>Cnr Winnie Mandela Drive, Sloane St,</span>
-          <span>Bryanston, Sandton, 2191</span>
+          <span>hello@shivasolutions.dev</span>
+          <span>South Africa</span>
         </div>
       </div>
     </footer>

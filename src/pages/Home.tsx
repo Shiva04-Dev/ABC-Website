@@ -6,9 +6,7 @@ import { useReveal } from "../hooks/useReveal"
 
 import ChatWidget from "../components/ChatWidget"
 
-// Lazy: pulls in the WebGL globe renderer, and this section is below the
-
-// fold, so it shouldn't weigh down Home's initial load.
+// Below the fold — lazy-load so it doesn't block Home's initial render.
 
 const Globe = lazy(() => import("../components/Globe"))
 
@@ -92,13 +90,7 @@ function Hero() {
 
     if (!video || !showVideo) return
 
-    // Try playing with sound on the first playthrough. Browsers commonly
-
-    // block unmuted autoplay for first-time visitors — if that happens,
-
-    // fall back to a muted play so the video still runs instead of
-
-    // sitting frozen on the poster.
+    // Try unmuted first; browsers that block that fall through to muted play.
 
     video.muted = false
 
@@ -209,7 +201,7 @@ function Hero() {
       {/* Visually hidden: keeps one real h1 for screen readers and route-change
           focus management (see RouteEffects) without a headline on screen. */}
       <h1 id="page-title" tabIndex={-1} className="sr-only">
-        AfriBiz Connect
+        Shiva's Solutions
       </h1>
 
       <div className="relative z-10 mt-auto mx-auto flex w-full max-w-4xl flex-col items-center gap-8 px-4 pt-32 pb-10">

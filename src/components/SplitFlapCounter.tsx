@@ -8,9 +8,7 @@ interface SplitFlapCounterProps {
   className?: string
 }
 
-// Decorative digit display — the accessible value lives in sibling text in
-
-// whatever renders this, so every character here is aria-hidden.
+// Decorative only — the accessible value lives in sibling text, so this is aria-hidden.
 
 export default function SplitFlapCounter({
   text,

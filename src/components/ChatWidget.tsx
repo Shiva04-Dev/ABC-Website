@@ -2,13 +2,10 @@ import { useEffect, useRef, useState, type FormEvent } from "react"
 
 import { ArrowRightIcon, BotIcon } from "./icons"
 
-// Sessions on the connected assistant expire after 30 minutes of
-// inactivity — mirror that here so a stale conversation doesn't linger
-// on screen past when the backend would have already dropped it.
+// Mirrors the backend's 30-minute session expiry so the UI doesn't linger.
 const INACTIVITY_LIMIT_MS = 30 * 60 * 1000
 
-// The backend caps message length at 2000 chars (422 past that) — mirror
-// the cap client-side so a normal user can't trigger that error.
+// Mirrors the backend's 2000-char cap so a normal user can't trigger a 422.
 const MAX_MESSAGE_LENGTH = 2000
 
 const CHAT_API_URL = import.meta.env.VITE_CHATBOT_API_URL as string | undefined
@@ -38,8 +35,7 @@ export default function ChatWidget() {
   const inactivityTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const listEndRef = useRef<HTMLDivElement>(null)
 
-  // One id per visit, held only in memory — sessions are meant to last a
-  // single visit, so this deliberately isn't persisted to localStorage.
+  // One id per visit, kept in memory only — never persisted to localStorage.
   const sessionIdRef = useRef<string | null>(null)
   if (sessionIdRef.current === null) {
     sessionIdRef.current = crypto.randomUUID()
@@ -127,7 +123,7 @@ export default function ChatWidget() {
         </div>
         <div className="flex flex-col">
           <span className="text-sm font-medium text-ink">
-            Ask AfriBiz Connect
+            Ask Shiva's Solutions
           </span>
           <span className="text-xs text-ink-dim">
             Ask about our services and what we can build for you

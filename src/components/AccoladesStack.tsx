@@ -35,13 +35,7 @@ export default function AccoladesStack({ accolades }: AccoladesStackProps) {
         cards.forEach((card, index) => {
           if (index === cards.length - 1) return
 
-          // Pin this card at the top of the viewport from the moment it
-
-          // arrives until the very last card arrives — every earlier card
-
-          // stays pinned in the same spot for the rest of the scroll, which
-
-          // is what lets them stack rather than just scroll past.
+          // Pin each card until the last one arrives, so they stack instead of scrolling past.
 
           ScrollTrigger.create({
             trigger: card,
@@ -57,11 +51,7 @@ export default function AccoladesStack({ accolades }: AccoladesStackProps) {
             pinSpacing: false,
           })
 
-          // As the next card arrives, this one recedes: shrinks and dims,
-
-          // scrubbed to the next card's own entry so it tracks the scroll
-
-          // continuously instead of jumping.
+          // Shrinks and dims as the next card arrives, scrubbed to track scroll smoothly.
 
           gsap.to(card, {
             scale: 0.92,
