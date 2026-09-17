@@ -8,7 +8,7 @@ interface SplitFlapCounterProps {
   className?: string
 }
 
-// Decorative only — the accessible value lives in sibling text, so this is aria-hidden.
+// Decorative only, the accessible value lives in sibling text, so this is aria-hidden.
 
 export default function SplitFlapCounter({
   text,

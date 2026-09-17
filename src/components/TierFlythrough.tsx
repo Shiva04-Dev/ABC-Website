@@ -34,7 +34,7 @@ export default function TierFlythrough({ tiers, mode }: TierFlythroughProps) {
 
         if (!stage || !track || slides.length < 2) return
 
-        // Pixel widths, not percentages — scrub needs an exact travel distance.
+        // Pixel widths, not percentages: scrub needs an exact travel distance.
 
         const stageWidth = stage.getBoundingClientRect().width
 

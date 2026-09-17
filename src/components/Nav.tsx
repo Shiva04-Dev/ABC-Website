@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 
 import { NavLink } from "react-router-dom"
 
-import { ArrowRightIcon, MenuIcon, XIcon } from "./icons"
+import { MenuIcon, XIcon } from "./icons"
 
 const NAV_ITEMS = [
   { label: "Home", to: "/", built: true },
@@ -10,8 +10,6 @@ const NAV_ITEMS = [
   { label: "About", to: "/about", built: true },
 
   { label: "Services", to: "/services", built: true },
-
-  { label: "Team", to: "/team", built: true },
 ]
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -70,8 +68,8 @@ export default function Nav() {
 
   return (
     <header className="absolute inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-5 lg:px-10">
-      <NavLink to="/" className="text-xl font-semibold tracking-tight text-ink">
-        Shiva's Solutions
+      <NavLink to="/" aria-label="Shiva's Solutions home" className="block">
+        <img src="/favicon.svg" alt="" aria-hidden="true" className="h-9 w-9" />
       </NavLink>
 
       <nav
@@ -94,21 +92,6 @@ export default function Nav() {
           ),
         )}
       </nav>
-
-      <div className="hidden items-center gap-4 lg:flex">
-        <a
-          href="#"
-          className="rounded-lg border border-white/20 px-5 py-2 text-sm font-medium text-ink transition-colors hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        >
-          Log in
-        </a>
-        <a
-          href="#"
-          className="flex items-center gap-2 rounded-lg bg-accent px-5 py-2 text-sm font-medium text-canvas transition-colors hover:bg-signature focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-        >
-          Get started <ArrowRightIcon aria-hidden="true" />
-        </a>
-      </div>
 
       <button
         ref={toggleRef}
@@ -162,20 +145,6 @@ export default function Nav() {
               ),
             )}
           </nav>
-          <div className="mt-auto flex flex-col gap-4">
-            <a
-              href="#"
-              className="rounded-lg border border-white/20 px-5 py-3 text-center text-sm font-medium text-ink"
-            >
-              Log in
-            </a>
-            <a
-              href="#"
-              className="flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 text-center text-sm font-medium text-canvas"
-            >
-              Get started <ArrowRightIcon aria-hidden="true" />
-            </a>
-          </div>
         </div>
       )}
     </header>

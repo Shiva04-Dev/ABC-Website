@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react"
+import { lazy, Suspense } from "react"
 
 import { useMediaQuery } from "../hooks/useMediaQuery"
 
@@ -6,11 +6,9 @@ import { useReveal } from "../hooks/useReveal"
 
 import ChatWidget from "../components/ChatWidget"
 
-// Below the fold — lazy-load so it doesn't block Home's initial render.
+// Below the fold, lazy-load so it doesn't block Home's initial render.
 
 const Globe = lazy(() => import("../components/Globe"))
-
-import { Volume2Icon, VolumeXIcon } from "../components/icons"
 
 const HERO_VIDEO_SRC = "/website-bg.mp4"
 
@@ -50,7 +48,7 @@ const PROCESS_STEPS = [
     title: "Support",
 
     description:
-      "We stay on after launch — software that ships is software that gets maintained.",
+      "We stay on after launch: software that ships is software that gets maintained.",
   },
 ]
 
@@ -58,7 +56,7 @@ const APPROACH_POINTS = [
   {
     title: "We ship implementations.",
 
-    description: "Not decks, not audits — working software your team can use.",
+    description: "Not decks, not audits: working software your team can use.",
   },
 
   {
@@ -81,69 +79,19 @@ function Hero() {
 
   const showVideo = !prefersReducedMotion
 
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  const [isMuted, setIsMuted] = useState(false)
-
-  useEffect(() => {
-    const video = videoRef.current
-
-    if (!video || !showVideo) return
-
-    // Try unmuted first; browsers that block that fall through to muted play.
-
-    video.muted = false
-
-    setIsMuted(false)
-
-    video.play().catch(() => {
-      video.muted = true
-
-      setIsMuted(true)
-
-      video.play().catch(() => {})
-    })
-  }, [showVideo])
-
-  const handleEnded = () => {
-    const video = videoRef.current
-
-    if (!video) return
-
-    // After the first full playthrough, mute and keep looping silently.
-
-    video.muted = true
-
-    setIsMuted(true)
-
-    video.play().catch(() => {})
-  }
-
-  const toggleMuted = () => {
-    const video = videoRef.current
-
-    if (!video) return
-
-    video.muted = !video.muted
-
-    setIsMuted(video.muted)
-  }
-
   return (
     <section className="relative flex min-h-[100dvh] w-full flex-col overflow-hidden bg-canvas">
       <div className="absolute inset-0">
         {showVideo ? (
           <video
-            ref={videoRef}
             autoPlay
-            muted // MUST HAVE THIS for autoPlay to work
-            loop // Usually wanted for backgrounds
+            muted
+            loop
             playsInline
             preload="metadata"
             poster={HERO_POSTER_SRC}
             aria-hidden="true"
             className="h-full w-full object-cover opacity-70"
-            onEnded={handleEnded}
             onError={(event) => {
               const video = event.currentTarget
 
@@ -181,21 +129,6 @@ function Hero() {
             SIGNAL&nbsp;LOCKED
           </span>
         </div>
-
-        {showVideo && (
-          <button
-            type="button"
-            onClick={toggleMuted}
-            aria-label={isMuted ? "Unmute video" : "Mute video"}
-            className="absolute top-36 right-6 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-canvas/60 text-ink backdrop-blur-sm transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:top-40 lg:right-10"
-          >
-            {isMuted ? (
-              <VolumeXIcon aria-hidden="true" />
-            ) : (
-              <Volume2Icon aria-hidden="true" />
-            )}
-          </button>
-        )}
       </div>
 
       {/* Visually hidden: keeps one real h1 for screen readers and route-change
@@ -211,10 +144,10 @@ function Hero() {
               className="h-1.5 w-1.5 rounded-full bg-accent"
               aria-hidden="true"
             />
-            STATUS&nbsp;—&nbsp;OPERATIONAL
+            STATUS&nbsp;·&nbsp;OPERATIONAL
           </span>
           <span className="text-ink-dim/50">·</span>
-          <span className="text-ink">International Award-Winning Company</span>
+          <span className="text-ink">Software & AI Portfolio</span>
         </div>
 
         <ChatWidget />

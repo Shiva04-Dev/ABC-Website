@@ -11,11 +11,11 @@ const MAX_MESSAGE_LENGTH = 2000
 const CHAT_API_URL = import.meta.env.VITE_CHATBOT_API_URL as string | undefined
 
 const CONFIG_ERROR_MESSAGE =
-  "Chat isn't configured yet — VITE_CHATBOT_API_URL is missing."
+  "Chat isn't configured yet: VITE_CHATBOT_API_URL is missing."
 const NETWORK_ERROR_MESSAGE =
-  "Couldn't reach the assistant — check that the backend is running and try again."
+  "Couldn't reach the assistant, check that the backend is running and try again."
 const VALIDATION_ERROR_MESSAGE =
-  "That message couldn't be sent — please rephrase and try again."
+  "That message couldn't be sent, please rephrase and try again."
 const FALLBACK_ERROR_MESSAGE = "Something went wrong. Please try again shortly."
 
 class ConfigError extends Error {}
@@ -35,7 +35,7 @@ export default function ChatWidget() {
   const inactivityTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const listEndRef = useRef<HTMLDivElement>(null)
 
-  // One id per visit, kept in memory only — never persisted to localStorage.
+  // One id per visit, kept in memory only, never persisted to localStorage.
   const sessionIdRef = useRef<string | null>(null)
   if (sessionIdRef.current === null) {
     sessionIdRef.current = crypto.randomUUID()

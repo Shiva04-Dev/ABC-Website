@@ -213,7 +213,7 @@ export default function Services() {
             Three tiers, each one building on the last.
           </h1>
           <p className="max-w-2xl text-base leading-relaxed text-ink-dim lg:text-lg">
-            A tiered service structure designed for growing SMEs — each tier
+            A tiered service structure designed for growing SMEs: each tier
             builds on the last, so a business can scale up support as it
             grows rather than starting over.
           </p>

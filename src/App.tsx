@@ -12,8 +12,6 @@ const Home = lazy(() => import("./pages/Home"))
 
 const About = lazy(() => import("./pages/About"))
 
-const Team = lazy(() => import("./pages/Team"))
-
 const Services = lazy(() => import("./pages/Services"))
 
 export default function App() {
@@ -27,7 +25,6 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/team" element={<Team />} />
               <Route path="/services" element={<Services />} />
             </Routes>
           </Suspense>

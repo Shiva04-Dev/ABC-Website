@@ -2,11 +2,29 @@ import { lazy, Suspense } from "react"
 
 import { useMediaQuery } from "../hooks/useMediaQuery"
 
+import TeamCard from "../components/TeamCard"
+
+import type { TeamMember } from "../components/TeamCard"
+
 import type { Accolade } from "../components/AccoladesStack"
 
 const RecognitionMap = lazy(() => import("../components/RecognitionMap"))
 
 const AccoladesStack = lazy(() => import("../components/AccoladesStack"))
+
+const SHIVA: TeamMember = {
+  name: "SHIVA",
+
+  city: "JOHANNESBURG",
+
+  role: "Core Full Stack Developer & AI Engineer",
+
+  quip: "Designed and built this project end to end: frontend, AI chat integration, and backend infrastructure.",
+
+  division: "technical",
+
+  photo: "/shiva.jpg",
+}
 
 const REACH_COUNTRIES = [
   "South Africa",
@@ -72,21 +90,27 @@ function Statement() {
         >
           A solo software & AI portfolio, built from South Africa.
         </h1>
-        <div className="flex max-w-2xl flex-col gap-5 text-base leading-relaxed text-ink-dim lg:text-lg">
-          <p>
-            Shiva's Solutions is a personal portfolio showcasing full-stack
-            builds — from AI-integrated chat products to brand-ready
-            marketing sites.
-          </p>
-          <p>
-            The work draws on Information Systems Architecture, Data
-            Engineering, and AI, paired with an eye for interface and motion
-            design — end-to-end builds, not just one layer of the stack.
-          </p>
-          <p className="text-ink">
-            Not just writing code — building the structural, intelligent, and
-            visual framework behind a product.
-          </p>
+        <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-16">
+          <div className="flex max-w-2xl flex-col gap-5 text-base leading-relaxed text-ink-dim lg:text-lg">
+            <p>
+              Shiva's Solutions is a personal portfolio showcasing full-stack
+              builds, from AI-integrated chat products to brand-ready
+              marketing sites.
+            </p>
+            <p>
+              The work draws on Information Systems Architecture, Data
+              Engineering, and AI, paired with an eye for interface and
+              motion design: end-to-end builds, not just one layer of the
+              stack.
+            </p>
+            <p className="text-ink">
+              Not just writing code, but building the structural,
+              intelligent, and visual framework behind a product.
+            </p>
+          </div>
+          <div className="shrink-0 lg:pt-2" style={{ transform: "translate(150px, -80px)" }}>
+            <TeamCard member={SHIVA} />
+          </div>
         </div>
       </div>
     </section>
@@ -102,7 +126,7 @@ function GlobalReachSection() {
             Built for a global audience
           </h2>
           <p className="text-sm text-ink-dim lg:text-base">
-            Decorative — illustrative connection points, not real offices or
+            Decorative: illustrative connection points, not real offices or
             clients.
           </p>
         </div>

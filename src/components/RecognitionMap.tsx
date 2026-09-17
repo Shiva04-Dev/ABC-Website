@@ -18,7 +18,7 @@ interface ArcLine {
 
 const HOME: MarkerPoint = { location: [-26.2041, 28.0473], size: 0.12 } // Johannesburg, South Africa
 
-// Illustrative connection points only, not real offices or clients — one per continent.
+// Illustrative connection points only, not real offices or clients: one per continent.
 
 const DESTINATIONS: MarkerPoint[] = [
   { location: [9.0765, 7.3986], size: 0.07 }, // Abuja, Nigeria (Africa)

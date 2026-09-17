@@ -6,8 +6,6 @@ const FOOTER_NAV = [
   { label: "About", to: "/about" },
 
   { label: "Services", to: "/services" },
-
-  { label: "Team", to: "/team" },
 ]
 
 export default function Footer() {
